@@ -12,7 +12,12 @@ let shortUrlCounter = 1;
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/public', express.static(`${process.cwd()}/public`));
 app.use(bodyParser.json());
+
+app.get('/', function(req, res) {
+  res.sendFile(process.cwd() + '/views/index.html');
+});
 
 // Endpoint to create short URL
 app.post('/api/shorturl', (req, res) => {
